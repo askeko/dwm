@@ -40,10 +40,14 @@ static const int nmaster     = 1;    /* number of clients in master area */
 static const int resizehints = 1;    /* 1 means respect size hints in tiled resizals */
 static const int lockfullscreen = 1; /* 1 will force focus on the fullscreen window */
 
+#include "fibonacci.c"
 static const Layout layouts[] = {
 	/* symbol     arrange function */
 	{ "[]=",		tile },    		/* Default: Master on left, slaves on right */
 	{ "TTT",		bstack },		/* Master on top, slaves on bottom */
+
+	{ "[@]",		spiral },		/* Fibonacci spiral */
+	{ "[\\]",		dwindle },		/* Decreasing in size right and leftward */
 
 	{ "[M]",		monocle },
 
@@ -115,8 +119,8 @@ static Key keys[] = {
 	/* { MODKEY|ShiftMask,		XK_r,		spawn,		SHCMD(TERMINAL " -e htop") }, */
 	{ MODKEY,			XK_t,		setlayout,	{.v = &layouts[0]} }, /* tile */
 	{ MODKEY|ShiftMask,		XK_t,		setlayout,	{.v = &layouts[1]} }, /* bstack */
-	/* { MODKEY,			XK_y,		setlayout,	{.v = &layouts[2]} }, */ /* spiral */
-	/* { MODKEY|ShiftMask,		XK_y,		setlayout,	{.v = &layouts[3]} }, */ /* dwindle */
+	{ MODKEY,			XK_y,		setlayout,	{.v = &layouts[2]} }, /* spiral */
+	{ MODKEY|ShiftMask,		XK_y,		setlayout,	{.v = &layouts[3]} }, /* dwindle */
 	/* { MODKEY,			XK_u,		setlayout,	{.v = &layouts[4]} }, */ /* deck */
 	/* { MODKEY|ShiftMask,		XK_u,		setlayout,	{.v = &layouts[5]} }, */ /* monocle */
 	/* { MODKEY,			XK_i,		setlayout,	{.v = &layouts[6]} }, */ /* centeredmaster */

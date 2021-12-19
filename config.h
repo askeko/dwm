@@ -157,7 +157,7 @@ static Key keys[] = {
 	{ MODKEY|ShiftMask,		XK_s,		togglesmartgaps,{0} },
 	{ MODKEY,			XK_d,		spawn,          SHCMD("rofi -show drun") },
 	/* { MODKEY|ShiftMask,		XK_d,		spawn,		SHCMD("") }, */
-	/* { MODKEY,			XK_f,		togglefullscr,	{0} }, */
+	{ MODKEY,			XK_f,		togglefullscr,	{0} },
 	/* { MODKEY|ShiftMask,		XK_f,		setlayout,	{.v = &layouts[8]} }, */
 	/* { MODKEY,			XK_g,		shiftview,	{ .i = -1 } }, */
 	/* { MODKEY|ShiftMask,		XK_g,		shifttag,	{ .i = -1 } }, */

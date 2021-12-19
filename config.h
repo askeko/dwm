@@ -4,8 +4,13 @@
 #define TERMINAL "kitty"
 
 /* appearance */
-static const unsigned int borderpx  = 1;        /* border pixel of windows */
+static const unsigned int borderpx  = 3;        /* border pixel of windows */
 static const unsigned int snap      = 32;       /* snap pixel */
+static const unsigned int gappih    = 20;       /* horiz inner gap between windows */
+static const unsigned int gappiv    = 10;       /* vert inner gap between windows */
+static const unsigned int gappoh    = 10;       /* horiz outer gap between windows and screen edge */
+static const unsigned int gappov    = 30;       /* vert outer gap between windows and screen edge */
+static       int smartgaps          = 0;        /* 1 means no outer gap when there is only one window */
 static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
 static const char *fonts[]          = { "monospace:size=10" };
@@ -40,11 +45,26 @@ static const int nmaster     = 1;    /* number of clients in master area */
 static const int resizehints = 1;    /* 1 means respect size hints in tiled resizals */
 static const int lockfullscreen = 1; /* 1 will force focus on the fullscreen window */
 
+#define FORCE_VSPLIT 1  /* nrowgrid layout: force two clients to always split vertically */
+#include "vanitygaps.c"
+
 static const Layout layouts[] = {
-	/* symbol     arrange function */
-	{ "[]=",      tile },    /* first entry is default */
-	{ "><>",      NULL },    /* no layout function means floating behavior */
-	{ "[M]",      monocle },
+	/* symbol	arrange 	function */
+	{ "[]=",      	tile },    	/* first entry is default */
+	{ "TTT",      	bstack },  	/* Master on top, slaves on bottom */
+
+	{ "[@]",	spiral },  	/* Fibonacci spiral */
+
+	{ "HHH",	grid },    	/* A grid of equal sizes */
+
+	{ "[D]",	deck },		/* Master on left, slaves in monocle-like mode on right */
+	{ "[M]",      	monocle },	/* All windows on top of eachother */
+
+	{ "|M|",	centeredmaster },	  /* Master in midle, slaves on sides */
+	{ ">M>",	centeredfloatingmaster }, /* Same but master floats */
+
+	{ "><>",	NULL },		/* no layout function means floating behavior */
+	{ NULL,		NULL },
 };
 
 /* key definitions */
@@ -111,13 +131,13 @@ static Key keys[] = {
 	{ MODKEY,			XK_r,		spawn,		SHCMD(TERMINAL " -e lf") },
 	/* { MODKEY|ShiftMask,		XK_r,		spawn,		SHCMD(TERMINAL " -e htop") }, */
 	{ MODKEY,			XK_t,		setlayout,	{.v = &layouts[0]} }, /* tile */
-	/* { MODKEY|ShiftMask,		XK_t,		setlayout,	{.v = &layouts[1]} }, */ /* bstack */
-	/* { MODKEY,			XK_y,		setlayout,	{.v = &layouts[2]} }, */ /* spiral */
-	/* { MODKEY|ShiftMask,		XK_y,		setlayout,	{.v = &layouts[3]} }, */ /* dwindle */
-	/* { MODKEY,			XK_u,		setlayout,	{.v = &layouts[4]} }, */ /* deck */
-	/* { MODKEY|ShiftMask,		XK_u,		setlayout,	{.v = &layouts[5]} }, */ /* monocle */
-	/* { MODKEY,			XK_i,		setlayout,	{.v = &layouts[6]} }, */ /* centeredmaster */
-	/* { MODKEY|ShiftMask,		XK_i,		setlayout,	{.v = &layouts[7]} }, */ /* centeredfloatingmaster */
+	{ MODKEY|ShiftMask,		XK_t,		setlayout,	{.v = &layouts[1]} }, /* bstack */
+	{ MODKEY,			XK_y,		setlayout,	{.v = &layouts[2]} }, /* spiral */
+	{ MODKEY|ShiftMask,		XK_y,		setlayout,	{.v = &layouts[3]} }, /* grid */
+	{ MODKEY,			XK_u,		setlayout,	{.v = &layouts[4]} }, /* deck */
+	{ MODKEY|ShiftMask,		XK_u,		setlayout,	{.v = &layouts[5]} }, /* monocle */
+	{ MODKEY,			XK_i,		setlayout,	{.v = &layouts[6]} }, /* centeredmaster */
+	{ MODKEY|ShiftMask,		XK_i,		setlayout,	{.v = &layouts[7]} }, /* centeredfloatingmaster */
 	{ MODKEY,			XK_o,		incnmaster,     {.i = +1 } },
 	{ MODKEY|ShiftMask,		XK_o,		incnmaster,     {.i = -1 } },
 	{ MODKEY,			XK_p,		spawn,		SHCMD("mpc toggle") },
@@ -131,10 +151,10 @@ static Key keys[] = {
 	/* { MODKEY,			XK_dead_diaresis, spawn,	SHCMD("") }, */
 	/* { MODKEY,ShiftMask,		XK_dead_diaresis, spawn,	SHCMD("") }, */
 
-	/* { MODKEY,			XK_a,		togglegaps,	{0} }, */
-	/* { MODKEY|ShiftMask,		XK_a,		defaultgaps,	{0} }, */
+	{ MODKEY,			XK_a,		togglegaps,	{0} },
+	{ MODKEY|ShiftMask,		XK_a,		defaultgaps,	{0} },
 	/* { MODKEY,			XK_s,		togglesticky,	{0} }, */
-	/* { MODKEY|ShiftMask,		XK_s,		spawn,		SHCMD("") }, */
+	{ MODKEY|ShiftMask,		XK_s,		togglesmartgaps,{0} },
 	{ MODKEY,			XK_d,		spawn,          SHCMD("rofi -show drun") },
 	/* { MODKEY|ShiftMask,		XK_d,		spawn,		SHCMD("") }, */
 	/* { MODKEY,			XK_f,		togglefullscr,	{0} }, */
@@ -153,9 +173,9 @@ static Key keys[] = {
 
 	/* { MODKEY,			XK_less,	spawn,		SHCMD("") }, */
 	/* { MODKEY|ShiftMask,		XK_less,	spawn,		SHCMD("") }, */
-	/* { MODKEY,			XK_z,		incrgaps,	{.i = +5 } }, */
+	{ MODKEY,			XK_z,		incrgaps,	{.i = +5 } },
 	/* { MODKEY|ShiftMask,		XK_z,		spawn,		SHCMD("") }, */
-	/* { MODKEY,			XK_x,		incrgaps,	{.i = -5 } }, */
+	{ MODKEY,			XK_x,		incrgaps,	{.i = -5 } },
 	/* { MODKEY|ShiftMask,		XK_x,		spawn,		SHCMD("") }, */
 	/* { MODKEY,			XK_c,		spawn,		SHCMD("") }, */
 	/* { MODKEY|ShiftMask,		XK_c,		spawn,		SHCMD("") }, */
@@ -190,9 +210,9 @@ static Key keys[] = {
 	/* { MODKEY|ShiftMask,		XK_Left,	,		, }, */
 	{ MODKEY,			XK_Right,	setmfact,	{.f = +0.05}, },
 	/* { MODKEY|ShiftMask,		XK_Right,	,		, }, */
-	/* { MODKEY,			XK_Up,		,		, }, */
+	{ MODKEY,			XK_Up,		setcfact,	{.f = +0.25}, },
 	/* { MODKEY|ShiftMask,		XK_Up,		,		, }, */
-	/* { MODKEY,			XK_Down,	,		, }, */
+	{ MODKEY,			XK_Down,	setcfact,	{.f = -0.25}, },
 	/* { MODKEY|ShiftMask,		XK_Down,	,		, }, */
 
 	{ 0,				XK_Print,	spawn,		SHCMD("maim pic-full-$(date '+%y%m%d-%H%M-%S').png") },

@@ -14,7 +14,7 @@ static const unsigned int gappov    = 30;       /* vert outer gap between window
 static       int smartgaps          = 0;        /* 1 means no outer gap when there is only one window */
 static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
-static const char *fonts[]          = { "monospace:size=10" };
+static const char *fonts[]          = { "JetBrains Mono:style:medium:size=11" };
 static const char dmenufont[]       = "monospace:size=10";
 static const char col_gray1[]       = "#222222";
 static const char col_gray2[]       = "#444444";
@@ -25,6 +25,18 @@ static const char *colors[][3]      = {
 	/*               fg         bg         border   */
 	[SchemeNorm] = { col_gray3, col_gray1, col_gray2 },
 	[SchemeSel]  = { col_gray4, col_cyan,  col_cyan  },
+};
+
+typedef struct {
+	const char *name;
+	const void *cmd;
+} Sp;
+const char *spcmd1[] = {TERMINAL, "--name", "spterm", "-o", "remember_window_size=no", "-o", "initial_window_width=120", "-o", "initial_window_height=34", NULL };
+const char *spcmd2[] = {TERMINAL, "--name", "spcalc", "-o", "font_size=16", "-o", "remember_window_size=no", "-o", "initial_window_width=240", "-o", "initial_window_height=204", "bc", "-lq", NULL };
+static Sp scratchpads[] = {
+	/* name		cmd */
+	{"spterm",	spcmd1},
+	{"spcalc",	spcmd2},
 };
 
 /* tagging */
@@ -40,6 +52,8 @@ static const Rule rules[] = {
 	{ "Firefox", NULL,     NULL,           1 << 8,    0,          0,          -1,        -1 },
 	{ "kitty",   NULL,     NULL,           0,         0,          1,           0,        -1 },
 	{ NULL,      NULL,     "Event Tester", 0,         0,          0,           1,        -1 }, /* xev */
+	{ NULL,      "spterm", NULL,           SPTAG(0),  1,          1,           0,        -1 },
+	{ NULL,      "spcalc", NULL,           SPTAG(1),  1,          1,           0,        -1 },
 };
 
 /* layout(s) */
@@ -169,8 +183,8 @@ static Key keys[] = {
 	/* J and K are automatically bound above in STACKEYS */
 	{ MODKEY,			XK_l,		focusmon,      	{.i = +1} },
 	{ MODKEY|ShiftMask,		XK_l,		tagmon,      	{.i = +1} },
-	/* { MODKEY,			XK_apostrophe,	togglescratch,	{.ui = 0} }, */
-	/* { MODKEY|ShiftMask,		XK_apostrophe,	togglescratch,	{.ui = 1} }, */
+	{ MODKEY,			XK_apostrophe,	togglescratch,	{.ui = 0} },
+	{ MODKEY|ShiftMask,		XK_apostrophe,	togglescratch,	{.ui = 1} },
 	{ MODKEY,			XK_Return,	spawn,		{.v = termcmd } },
 	/* { MODKEY|ShiftMask,		XK_Return,	spawn,		SHCMD("") }, */
 

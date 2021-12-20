@@ -19,6 +19,7 @@ static const unsigned int gappov    = 30;       /* vert outer gap between window
 static       int smartgaps          = 0;        /* 1 means no outer gap when there is only one window */
 static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
+static const unsigned int colorfultag = 1; /* 0 means use SchemeSel for selected tag */
 static const int horizpadbar        = 2;        /* horizontal padding for statusbar */
 static const int vertpadbar         = 0;        /* vertical padding for statusbar */
 static const char *fonts[]          = { "JetBrains Mono:style:medium:size=11" };
@@ -28,10 +29,25 @@ static const char col_gray2[]       = "#444444";
 static const char col_gray3[]       = "#bbbbbb";
 static const char col_gray4[]       = "#eeeeee";
 static const char col_cyan[]        = "#005577";
+static const char gray3[]           = "#606672";
+static const char black[]           = "#2E3440";
+static const char cyan[]            = "#81A1C1";
+static const char red[]             = "#BF616A";
+static const char orange[]          = "#caaa6a";
+static const char green[]           = "#89b482";
+static const char pink[]            = "#B48EAD";
+
 static const char *colors[][3]      = {
 	/*               fg         bg         border   */
 	[SchemeNorm] = { col_gray3, col_gray1, col_gray2 },
 	[SchemeSel]  = { col_gray4, col_cyan,  col_cyan  },
+        [SchemeTag]        = { gray3, black, black },
+        [SchemeTag1]       = { cyan,  black, black },
+        [SchemeTag2]       = { red,   black, black },
+        [SchemeTag3]       = { orange, black,black },
+        [SchemeTag4]       = { green, black, black },
+        [SchemeTag5]       = { pink,  black, black },
+        [SchemeLayout]     = { green, black, black },
 };
 
 typedef struct {
@@ -47,7 +63,11 @@ static Sp scratchpads[] = {
 };
 
 /* tagging */
-static const char *tags[] = { "1", "2", "3", "4", "5", "6", "7", "8", "9" };
+static const char *tags[] = { "1", "2", "3", "4", "5" };
+
+static const int tagschemes[] = { SchemeTag1, SchemeTag2, SchemeTag3,
+                                  SchemeTag4, SchemeTag5
+};
 
 static const unsigned int ulinepad	= 5;	/* horizontal padding between the underline and tag */
 static const unsigned int ulinestroke	= 2;	/* thickness / height of the underline */

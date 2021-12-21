@@ -19,6 +19,14 @@ static const unsigned int gappov    = 30;       /* vert outer gap between window
 static       int smartgaps          = 0;        /* 1 means no outer gap when there is only one window */
 static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
+
+/*   Display modes of the tab bar: never shown, always shown, shown only in */
+/*   monocle mode in presence of several windows.                           */
+/*   Modes after showtab_nmodes are disabled                                */
+enum showtab_modes { showtab_never, showtab_auto, showtab_nmodes, showtab_always};
+static const int showtab            = showtab_auto; /* Default tab bar show mode */
+static const Bool toptab            = False;    /* False means bottom tab bar */
+
 static const unsigned int colorfultag = 1; /* 0 means use SchemeSel for selected tag */
 static const int horizpadbar        = 2;        /* horizontal padding for statusbar */
 static const int vertpadbar         = 0;        /* vertical padding for statusbar */
@@ -64,6 +72,11 @@ static Sp scratchpads[] = {
 
 /* tagging */
 static const char *tags[] = { "1", "2", "3", "4", "5" };
+
+/* default layout per tags */
+/* The first element is for all-tag view, following i-th element corresponds to */
+/* tags[i]. Layout is referred using the layouts array index.*/
+static int def_layouts[1 + LENGTH(tags)]  = { 0, 0, 0, 0, 0, 0};
 
 static const int tagschemes[] = { SchemeTag1, SchemeTag2, SchemeTag3,
                                   SchemeTag4, SchemeTag5
@@ -147,7 +160,7 @@ static Key keys[] = {
 	/* { MODKEY,			XK_Escape,	spawn, 		SHCMD("") } */
 	/* { MODKEY|ShiftMask,		XK_Escape,	spawn,		SHCMD("") }, */
 
-	/* { MODKEY,			XK_onehalf,	spawn,		SHCMD("") } */
+	{ MODKEY,			XK_onehalf,	tabmode,	{-1} },
 	/* { MODKEY|ShiftMask,		XK_onehalf,	spawn,		SHCMD("") } */
 	TAGKEYS(			XK_1,		0)
 	TAGKEYS(			XK_2,		1)
@@ -321,5 +334,6 @@ static Button buttons[] = {
 	{ ClkTagBar,            0,              Button3,        toggleview,     {0} },
 	{ ClkTagBar,            MODKEY,         Button1,        tag,            {0} },
 	{ ClkTagBar,            MODKEY,         Button3,        toggletag,      {0} },
+	{ ClkTabBar,            0,              Button1,        focuswin,       {0} },
 };
 

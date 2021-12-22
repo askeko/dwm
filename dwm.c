@@ -1130,10 +1130,10 @@ drawbar(Monitor *m)
 		drw_text(drw, x, 0, w, bh, lrpad / 2, tags[i], urg & 1 << i);
 		if (ulineall || m->tagset[m->seltags] & 1 << i)
 			drw_rect(drw, x + ulinepad, bh - ulinestroke - ulinevoffset, w - (ulinepad * 2), ulinestroke, 1, 0);
-		if (occ & 1 << i)
+		/* if (occ & 1 << i)
 			drw_rect(drw, x + boxs, boxs, boxw, boxw,
 				m == selmon && selmon->sel && selmon->sel->tags & 1 << i,
-				urg & 1 << i);
+				urg & 1 << i); */
 		x += w;
 	}
 	w = blw = TEXTW(m->ltsymbol);

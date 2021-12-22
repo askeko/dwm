@@ -46,9 +46,10 @@ static const char green[]           = "#89b482";
 static const char pink[]            = "#B48EAD";
 
 static const char *colors[][3]      = {
-	/*               fg         bg         border   */
-	[SchemeNorm] = { col_gray3, col_gray1, col_gray2 },
-	[SchemeSel]  = { col_gray4, col_cyan,  col_cyan  },
+	/*                     fg         bg         border   */
+	[SchemeNorm]       = { col_gray3, col_gray1, col_gray2 },
+	[SchemeSel]        = { col_gray4, col_cyan,  col_cyan  },
+	[SchemeTitle]      = { col_gray3, col_gray1, col_gray2 },
         [SchemeTag]        = { gray3, black, black },
         [SchemeTag1]       = { cyan,  black, black },
         [SchemeTag2]       = { red,   black, black },

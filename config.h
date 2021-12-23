@@ -28,8 +28,8 @@ static const int showtab            = showtab_auto; /* Default tab bar show mode
 static const Bool toptab            = False;    /* False means bottom tab bar */
 
 static const unsigned int colorfultag = 1; /* 0 means use SchemeSel for selected tag */
-static const int horizpadbar        = 2;        /* horizontal padding for statusbar */
-static const int vertpadbar         = 0;        /* vertical padding for statusbar */
+static const int horizpadbar        = 5;        /* horizontal padding for statusbar */
+static const int vertpadbar         = 8;        /* vertical padding for statusbar */
 static const char *fonts[]          = { "JetBrains Mono:style:medium:size=11" };
 static const char dmenufont[]       = "monospace:size=10";
 static const char col_gray1[]       = "#222222";

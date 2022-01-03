@@ -218,7 +218,7 @@ static Key keys[] = {
 
 	{ MODKEY,			XK_a,		togglegaps,	{0} },
 	{ MODKEY|ShiftMask,		XK_a,		defaultgaps,	{0} },
-	/* { MODKEY,			XK_s,		togglesticky,	{0} }, */
+	{ MODKEY,			XK_s,		togglesticky,	{0} },
 	{ MODKEY|ShiftMask,		XK_s,		togglesmartgaps,{0} },
 	{ MODKEY,			XK_d,		spawn,          SHCMD("rofi -show drun") },
 	/* { MODKEY|ShiftMask,		XK_d,		spawn,		SHCMD("") }, */

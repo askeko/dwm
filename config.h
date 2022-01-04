@@ -39,7 +39,7 @@ static const char dmenufont[]       = "monospace:size=10";
 
 static const char *colors[][3]      = {
 	/*                     fg         bg         border   */
-	[SchemeNorm]       = { gray3, black, gray2 },
+	[SchemeNorm]       = { white, black, gray2 },
 	[SchemeSel]        = { gray4, blue,  blue  },
 	[SchemeTitle]      = { white, black, black },
         [SchemeTag]        = { white, black, black },

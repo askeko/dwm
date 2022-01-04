@@ -30,33 +30,25 @@ static const Bool toptab            = False;    /* False means bottom tab bar */
 static const unsigned int colorfultag = 1; /* 0 means use SchemeSel for selected tag */
 static const int horizpadbar        = 5;        /* horizontal padding for statusbar */
 static const int vertpadbar         = 10;        /* vertical padding for statusbar */
-static const char *fonts[]          = { "JetBrains Mono:style:medium:size=11" };
+static const char *fonts[]          = { "JetBrains Mono:style:medium:size=10",
+                                        "Material Design Icons-Regular:size=10", };
 static const char dmenufont[]       = "monospace:size=10";
-static const char col_gray1[]       = "#222222";
-static const char col_gray2[]       = "#444444";
-static const char col_gray3[]       = "#bbbbbb";
-static const char col_gray4[]       = "#eeeeee";
-static const char col_cyan[]        = "#005577";
-static const char gray3[]           = "#606672";
-static const char black[]           = "#2E3440";
-static const char cyan[]            = "#81A1C1";
-static const char red[]             = "#BF616A";
-static const char orange[]          = "#caaa6a";
-static const char green[]           = "#89b482";
-static const char pink[]            = "#B48EAD";
+
+// Theme
+#include "themes/tokyo_night.h"
 
 static const char *colors[][3]      = {
 	/*                     fg         bg         border   */
-	[SchemeNorm]       = { col_gray3, col_gray1, col_gray2 },
-	[SchemeSel]        = { col_gray4, col_cyan,  col_cyan  },
-	[SchemeTitle]      = { col_gray3, col_gray1, col_gray2 },
-        [SchemeTag]        = { gray3, black, black },
-        [SchemeTag1]       = { cyan,  black, black },
+	[SchemeNorm]       = { gray3, black, gray2 },
+	[SchemeSel]        = { gray4, blue,  blue  },
+	[SchemeTitle]      = { white, black, black },
+        [SchemeTag]        = { white, black, black },
+        [SchemeTag1]       = { blue,  black, black },
         [SchemeTag2]       = { red,   black, black },
         [SchemeTag3]       = { orange, black,black },
         [SchemeTag4]       = { green, black, black },
         [SchemeTag5]       = { pink,  black, black },
-        [SchemeLayout]     = { green, black, black },
+        [SchemeLayout]     = { green, gray3, black },
 };
 
 typedef struct {
@@ -72,7 +64,7 @@ static Sp scratchpads[] = {
 };
 
 /* tagging */
-static const char *tags[] = { "1", "2", "3", "4", "5" };
+static const char *tags[] = { "󰞷", "󰈹", "󰭻", "󰨇", "󰝚" };
 
 /* default layout per tags */
 /* The first element is for all-tag view, following i-th element corresponds to */
@@ -152,7 +144,7 @@ static const char *termcmd[]  = { TERMINAL, NULL };
 
 /* OBSOLETE???? */
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
-static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, NULL };
+static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", black, "-nf", gray3, "-sb", blue, "-sf", gray4, NULL };
 
 /* #include <X11/XF86keysym.h> */
 

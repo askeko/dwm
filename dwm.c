@@ -604,7 +604,7 @@ buttonpress(XEvent *e)
 		} else if (ev->x < x + blw)
 			click = ClkLtSymbol;
 		else if (ev->x > selmon->ww - getsystraywidth() - statusw) {
-			x = selmon->ww - statusw;
+			x = selmon->ww - statusw - getsystraywidth();
 			click = ClkStatusText;
 
 			char *text, *s, ch;
@@ -1037,10 +1037,11 @@ drawstatusbar(Monitor *m, int bh, char* stext) {
 	text = p;
 
 	w += horizpadbar;
-	if (showsystray && m == systraytomon(m))
-                ret = x = m->ww - w - getsystraywidth();
+        if (showsystray && m == systraytomon(m))
+                x = m->ww - w - getsystraywidth();
         else
-                ret = x = m->ww - w;
+                x = m->ww - w;
+        ret = w;
 
 	drw_setscheme(drw, scheme[LENGTH(colors)]);
 	drw->scheme[ColFg] = scheme[SchemeNorm][ColFg];
@@ -1123,7 +1124,7 @@ drawbar(Monitor *m)
 
 	/* draw status first so it can be overdrawn by tags later */
 	if (m == selmon) { /* status is only drawn on selected monitor */
-		tw = statusw = m->ww - drawstatusbar(m, bh, stext);
+		tw = statusw = drawstatusbar(m, bh, stext);
 	}
 
 	resizebarwin(m);

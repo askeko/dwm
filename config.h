@@ -148,7 +148,7 @@ static const char *termcmd[]  = { TERMINAL, NULL };
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
 static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", black, "-nf", gray3, "-sb", blue, "-sf", gray4, NULL };
 
-/* #include <X11/XF86keysym.h> */
+#include <X11/XF86keysym.h>
 
 static Key keys[] = {
 	/* modifier                     key        	function        argument */
@@ -280,16 +280,16 @@ static Key keys[] = {
 	/* { MODKEY|ShiftMask,		XK_Print,	spawn,		SHCMD("dmenurecord kill") }, */
 	/* { MODKEY,			XK_Delete,	spawn,		SHCMD("dmenurecord kill") }, */
 	/* { MODKEY,			XK_Scroll_Lock,	spawn,		SHCMD("killall screenkey || screenkey &") }, */
-	/*
-	{ 0, XF86XK_AudioMute,		spawn,		SHCMD("pamixer -t") },
-	{ 0, XF86XK_AudioRaiseVolume,	spawn,		SHCMD("pamixer --allow-boost -i 5") },
-	{ 0, XF86XK_AudioLowerVolume,	spawn,		SHCMD("pamixer --allow-boost -d 5") },
+
+	{ 0, XF86XK_AudioMute,		spawn,		SHCMD("pamixer -t; kill -44 $(pidof dwmblocks)") },
+	{ 0, XF86XK_AudioRaiseVolume,	spawn,		SHCMD("pamixer --allow-boost -i 5; kill -44 $(pidof dwmblocks)") },
+	{ 0, XF86XK_AudioLowerVolume,	spawn,		SHCMD("pamixer --allow-boost -d 5; kill -44 $(pidof dwmblocks)") },
 	{ 0, XF86XK_AudioPrev,		spawn,		SHCMD("mpc prev") },
 	{ 0, XF86XK_AudioNext,		spawn,		SHCMD("mpc next") },
 	{ 0, XF86XK_AudioPause,		spawn,		SHCMD("mpc pause") },
 	{ 0, XF86XK_AudioPlay,		spawn,		SHCMD("mpc play") },
 	{ 0, XF86XK_AudioStop,		spawn,		SHCMD("mpc stop") },
-	*/
+
 	/* { 0, XF86XK_AudioRewind,	spawn,		SHCMD("mpc seek -10") }, */
 	/* { 0, XF86XK_AudioForward,	spawn,		SHCMD("mpc seek +10") }, */
 	/* { 0, XF86XK_AudioMedia,		spawn,		SHCMD(TERMINAL " -e ncmpcpp") }, */

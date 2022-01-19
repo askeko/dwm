@@ -44,13 +44,13 @@ static const char *colors[][3]      = {
 	[SchemeNorm]       = { white, black, gray2 },
 	[SchemeSel]        = { gray4, blue,  green },
 	[SchemeTitle]      = { white, black, black },
-        [SchemeTag]        = { white, black, black },
-        [SchemeTag1]       = { blue,  black, black },
-        [SchemeTag2]       = { red,   black, black },
-        [SchemeTag3]       = { orange, black,black },
-        [SchemeTag4]       = { green, black, black },
-        [SchemeTag5]       = { pink,  black, black },
-        [SchemeLayout]     = { green, gray3, black },
+	[SchemeTag]        = { white, black, black },
+	[SchemeTag1]       = { blue,  black, black },
+	[SchemeTag2]       = { red,   black, black },
+	[SchemeTag3]       = { orange, black,black },
+	[SchemeTag4]       = { green, black, black },
+	[SchemeTag5]       = { pink,  black, black },
+	[SchemeLayout]     = { green, gray3, black },
 };
 
 typedef struct {
@@ -66,7 +66,7 @@ static Sp scratchpads[] = {
 };
 
 /* tagging */
-static const char *tags[] = { "󰞷", "󰈹", "󰭻", "󰨇", "󰝚" };
+static const char *tags[] = { "󰆍", "󰈹", "󰭻", "󰊴", "󰝚" };
 
 /* default layout per tags */
 /* The first element is for all-tag view, following i-th element corresponds to */

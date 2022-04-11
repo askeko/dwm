@@ -40,9 +40,9 @@ static const char dmenufont[]       = "monospace:size=10";
 #include "themes/tokyo_night.h"
 
 static const char *colors[][3]      = {
-	/*                     fg         bg         border   */
+	/*                     fg     bg     border   */
 	[SchemeNorm]       = { white, black, gray2 },
-	[SchemeSel]        = { gray4, blue,  green },
+	[SchemeSel]        = { gray4, blue,  blue },
 	[SchemeTitle]      = { white, black, black },
 	[SchemeTag]        = { white, black, black },
 	[SchemeTag1]       = { blue,  black, black },

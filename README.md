@@ -1,4 +1,4 @@
-<img src="https://github.com/askeko/dwm/blob/main/preview.png?raw=true"><hr>
+![preview](https://github.com/askeko/dwm/blob/main/preview.png?raw=true)
 
 dwm - dynamic window manager
 ============================

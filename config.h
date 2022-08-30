@@ -50,6 +50,7 @@ static const char *colors[][3]      = {
 	[SchemeTag3]       = { orange, black,black },
 	[SchemeTag4]       = { green, black, black },
 	[SchemeTag5]       = { pink,  black, black },
+	[SchemeTag6]       = { yellow, black, black },
 	[SchemeLayout]     = { green, gray3, black },
 };
 
@@ -66,7 +67,7 @@ static Sp scratchpads[] = {
 };
 
 /* tagging */
-static const char *tags[] = { "󰅨", "󰆍", "󰈹", "󰭻", "󰤽" };
+static const char *tags[] = { "󰅨", "󰆍", "󰈹", "󰭻", "󰤽", "T" };
 
 /* default layout per tags */
 /* The first element is for all-tag view, following i-th element corresponds to */
@@ -74,7 +75,7 @@ static const char *tags[] = { "󰅨", "󰆍", "󰈹", "󰭻", "󰤽" };
 static int def_layouts[1 + LENGTH(tags)]  = { 0, 0, 0, 0, 0, 0};
 
 static const int tagschemes[] = { SchemeTag1, SchemeTag2, SchemeTag3,
-                                  SchemeTag4, SchemeTag5
+                                  SchemeTag4, SchemeTag5, SchemeTag6
 };
 
 static const unsigned int ulinepad	= 5;	/* horizontal padding between the underline and tag */
@@ -164,7 +165,7 @@ static Key keys[] = {
 	TAGKEYS(			XK_3,		2)
 	TAGKEYS(			XK_4,		3)
 	TAGKEYS(			XK_5,		4)
-	/* TAGKEYS(			XK_6,		5) */
+	TAGKEYS(			XK_6,		5)
 	/* TAGKEYS(			XK_7,		6) */
 	/* TAGKEYS(			XK_8,		7) */
 	/* TAGKEYS(			XK_9,		8) */

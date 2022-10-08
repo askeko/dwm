@@ -67,7 +67,7 @@ static Sp scratchpads[] = {
 };
 
 /* tagging */
-static const char *tags[] = { "1", "2", "3", "4", "5", "6" };
+static const char *tags[] = { "󰆍", "󰨞", "󰣇", "󰊯", "󰙯", "󰓇" };
 
 /* default layout per tags */
 /* The first element is for all-tag view, following i-th element corresponds to */

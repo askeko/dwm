@@ -58,7 +58,7 @@ typedef struct {
 	const char *name;
 	const void *cmd;
 } Sp;
-const char *spcmd1[] = {TERMINAL, "--name", "spterm", "-o", "remember_window_size=no", "-o", "initial_window_width=120", "-o", "initial_window_height=34", NULL };
+const char *spcmd1[] = {TERMINAL, "--name", "spterm", "-o", "remember_window_size=no", "-o", "initial_window_width=240", "-o", "initial_window_height=50", NULL };
 const char *spcmd2[] = {TERMINAL, "--name", "spcalc", "-o", "font_size=16", "-o", "remember_window_size=no", "-o", "initial_window_width=240", "-o", "initial_window_height=204", "bc", "-lq", NULL };
 static Sp scratchpads[] = {
 	/* name		cmd */
@@ -92,6 +92,7 @@ static const Rule rules[] = {
 	{ "Gimp",    NULL,     NULL,           0,         1,          0,           0,        -1 },
 	{ "Firefox", NULL,     NULL,           1 << 8,    0,          0,          -1,        -1 },
 	{ "kitty",   NULL,     NULL,           0,         0,          1,           0,        -1 },
+	{ "Onboard",   NULL,     NULL,         0,         1,          0,           0,        -1 },
 	{ NULL,      NULL,     "Event Tester", 0,         0,          0,           1,        -1 }, /* xev */
 	{ NULL,      "spterm", NULL,           SPTAG(0),  1,          1,           0,        -1 },
 	{ NULL,      "spcalc", NULL,           SPTAG(1),  1,          1,           0,        -1 },

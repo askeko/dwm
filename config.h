@@ -59,7 +59,7 @@ typedef struct {
 	const void *cmd;
 } Sp;
 const char *spcmd1[] = {TERMINAL, "--name", "spterm", "-o", "remember_window_size=no", "-o", "initial_window_width=500", "-o", "initial_window_height=200", NULL };
-const char *spcmd2[] = {TERMINAL, "--name", "spcalc", "-o", "font_size=16", "-o", "remember_window_size=no", "-o", "initial_window_width=240", "-o", "initial_window_height=204", "bc", "-lq", NULL };
+const char *spcmd2[] = {TERMINAL, "--name", "spcalc", "-o", "font_size=16", "-o", "remember_window_size=no", "-o", "initial_window_width=480", "-o", "initial_window_height=408", "bc", "-lq", NULL };
 static Sp scratchpads[] = {
 	/* name		cmd */
 	{"spterm",	spcmd1},

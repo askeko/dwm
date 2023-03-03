@@ -37,7 +37,7 @@ static const char *fonts[]          = { "JetBrainsMono Nerd Font:style:medium:si
 static const char dmenufont[]       = "monospace:size=10";
 
 // Theme
-#include "themes/catppuccin_latte.h"
+#include "themes/catpuccin_mocha.h"
 
 static const char *colors[][3]      = {
 	/*                     fg     bg     border   */

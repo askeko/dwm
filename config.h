@@ -230,6 +230,8 @@ static Key keys[] = {
 	{ MODKEY,			XK_h,		focusmon,	{.i = -1} },
 	{ MODKEY|ShiftMask,		XK_h,		tagmon,		{.i = -1} },
 	/* J and K are automatically bound above in STACKEYS */
+	{ MODKEY|ControlMask|ShiftMask, XK_k, spawn, SHCMD("setxkbmap -model pc105 -layout dk -variant dvorak")},
+	{ MODKEY|ControlMask|ShiftMask, XK_j, spawn, SHCMD("setxkbmap -model pc105 -layout dk")},
 	{ MODKEY,			XK_l,		focusmon,      	{.i = +1} },
 	{ MODKEY|ShiftMask,		XK_l,		tagmon,      	{.i = +1} },
 	{ MODKEY,			XK_apostrophe,	togglescratch,	{.ui = 0} },

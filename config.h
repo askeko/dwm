@@ -32,8 +32,8 @@ static const Bool toptab            = False;    /* False means bottom tab bar */
 static const unsigned int colorfultag = 1; /* 0 means use SchemeSel for selected tag */
 static const int horizpadbar        = 5;        /* horizontal padding for statusbar */
 static const int vertpadbar         = 12;        /* vertical padding for statusbar */
-static const char *fonts[]          = { "JetBrainsMono Nerd Font:style:medium:size=11",
-                                        "Material Design Icons-Regular:size=10", };
+static const char *fonts[]          = { "FiraCode Nerd Font Mono:style:medium:size=11",
+                                        "Material Design Icons-Regular:size=12", };
 static const char dmenufont[]       = "monospace:size=10";
 
 // Theme

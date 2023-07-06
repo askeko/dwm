@@ -212,8 +212,8 @@ static Key keys[] = {
 	{ MODKEY|ShiftMask,		XK_ae,		spawn,		SHCMD("mpc seek -60") },
 	{ MODKEY,			XK_oslash,	spawn,		SHCMD("mpc seek +10") },
 	{ MODKEY|ShiftMask,		XK_oslash,	spawn,		SHCMD("mpc seek +60") },
-	/* { MODKEY,			XK_aring,	spawn,		SHCMD("") }, */
-	/* { MODKEY|ShiftMask,		XK_aring,	spawn,		SHCMD("") }, */
+	{ MODKEY,			XK_aring,	spawn,		SHCMD("scr_def") },
+    { MODKEY|ShiftMask,		XK_aring,	spawn,		SHCMD("scr_home") },
 	/* { MODKEY,			XK_dead_diaresis, spawn,	SHCMD("") }, */
 	/* { MODKEY,ShiftMask,		XK_dead_diaresis, spawn,	SHCMD("") }, */
 

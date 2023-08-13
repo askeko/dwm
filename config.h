@@ -1,7 +1,7 @@
 /* See LICENSE file for copyright and license details. */
 
 /* constants */
-#define TERMINAL "kitty"
+#define TERMINAL "wezterm"
 
 /* appearance */
 static const unsigned int borderpx  = 3;        /* border pixel of windows */
@@ -37,7 +37,7 @@ static const char *fonts[]          = { "FiraCode Nerd Font Mono:style:medium:si
 static const char dmenufont[]       = "monospace:size=10";
 
 // Theme
-#include "themes/catpuccin_mocha.h"
+#include "themes/tokyo_night.h"
 
 static const char *colors[][3]      = {
 	/*                     fg     bg     border   */
@@ -49,11 +49,11 @@ static const char *colors[][3]      = {
 	[SchemeTag2]       = { red,   black, black },
 	[SchemeTag3]       = { orange, black,black },
 	[SchemeTag4]       = { green, black, black },
-	[SchemeTag5]       = { pink,  black, black },
+	[SchemeTag5]       = { purple,  black, black },
 	[SchemeTag6]       = { yellow, black, black },
 	[SchemeTag7]       = { teal, black, black },
-	[SchemeTag8]       = { lavender, black, black },
-	[SchemeLayout]     = { green, gray3, black },
+	[SchemeTag8]       = { cyan, black, black },
+	[SchemeLayout]     = { blue, gray3, black },
 };
 
 typedef struct {
@@ -230,8 +230,8 @@ static Key keys[] = {
 	{ MODKEY,			XK_h,		focusmon,	{.i = -1} },
 	{ MODKEY|ShiftMask,		XK_h,		tagmon,		{.i = -1} },
 	/* J and K are automatically bound above in STACKEYS */
-	{ MODKEY|ControlMask|ShiftMask, XK_k, spawn, SHCMD("setxkbmap -model pc105 -layout dk -variant dvorak")},
-	{ MODKEY|ControlMask|ShiftMask, XK_j, spawn, SHCMD("setxkbmap -model pc105 -layout dk")},
+	{ MODKEY|ControlMask|ShiftMask, XK_v, spawn, SHCMD("setxkbmap -model pc105 -layout dk -variant dvorak")},
+	{ MODKEY|ControlMask|ShiftMask, XK_d, spawn, SHCMD("setxkbmap -model pc105 -layout dk")},
 	{ MODKEY,			XK_l,		focusmon,      	{.i = +1} },
 	{ MODKEY|ShiftMask,		XK_l,		tagmon,      	{.i = +1} },
 	{ MODKEY,			XK_apostrophe,	togglescratch,	{.ui = 0} },

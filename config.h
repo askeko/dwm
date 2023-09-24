@@ -55,16 +55,17 @@ static const char *fonts[] = {
 static const char dmenufont[] = "monospace:size=10";
 
 /* THEME */
-#include "themes/rose_pine.h"
+#include "themes/tokyo_night.h"
 
 static const char *colors[][3] = {
     /*                     fg     bg     border   */
-    [SchemeNorm] = {text, base, overlay},   [SchemeSel] = {subtle, rose, rose},
-    [SchemeTitle] = {text, base, base},     [SchemeTag] = {text, base, base},
-    [SchemeTag1] = {rose, base, base},      [SchemeTag2] = {love, base, base},
-    [SchemeTag3] = {gold, base, base},      [SchemeTag4] = {pine, base, base},
-    [SchemeTag5] = {foam, base, base},      [SchemeTag6] = {iris, base, base},
-    [SchemeLayout] = {rose, overlay, base},
+    [SchemeNorm] = {fg, bg, gray2},   [SchemeSel] = {gray4, blue, blue},
+    [SchemeTitle] = {fg, bg, bg},     [SchemeTag] = {fg, bg, bg},
+    [SchemeTag1] = {blue, bg, bg},    [SchemeTag2] = {red, bg, bg},
+    [SchemeTag3] = {green, bg, bg},   [SchemeTag4] = {yellow, bg, bg},
+    [SchemeTag5] = {purple, bg, bg},  [SchemeTag6] = {teal, bg, bg},
+    [SchemeTag7] = {orange, bg, bg},  [SchemeTag8] = {cyan, bg, bg},
+    [SchemeTag9] = {magenta, bg, bg}, [SchemeLayout] = {blue, gray2, bg},
 };
 
 typedef struct {
@@ -102,15 +103,17 @@ static Sp scratchpads[] = {
 };
 
 /* tagging */
-static const char *tags[] = {"󰆍", "󰨞", "󱗖", "󰊯", "󰙯", "󰣇"};
+static const char *tags[] = {"󰆍", "󰨞", "󱗖", "󰊯", "󰙯",
+                             "󰣇", "󰣇", "󰣇", "󰣇"};
 
 /* default layout per tags
  * The first element is for all-tag view, following i-th element corresponds to
  * tags[i]. Layout is referred using the layouts array index.*/
-static int def_layouts[1 + LENGTH(tags)] = {0, 0, 0, 0, 0, 0};
+static int def_layouts[1 + LENGTH(tags)] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
 
 static const int tagschemes[] = {SchemeTag1, SchemeTag2, SchemeTag3,
-                                 SchemeTag4, SchemeTag5, SchemeTag6};
+                                 SchemeTag4, SchemeTag5, SchemeTag6,
+                                 SchemeTag7, SchemeTag8, SchemeTag9};
 
 // horizontal padding between the underline and tag
 static const unsigned int ulinepad = 5;
@@ -195,8 +198,8 @@ static const char *termcmd[] = {TERMINAL, NULL};
 static char dmenumon[2] = "0";
 /* component of dmenucmd, manipulated in spawn() */
 static const char *dmenucmd[] = {"dmenu_run", "-m",  dmenumon, "-fn", dmenufont,
-                                 "-nb",       base,  "-nf",    muted, "-sb",
-                                 foam,        "-sf", subtle,   NULL};
+                                 "-nb",       bg,    "-nf",    gray3, "-sb",
+                                 blue,        "-sf", gray4,    NULL};
 
 #include <X11/XF86keysym.h>
 
@@ -213,10 +216,8 @@ static Key keys[] = {
      */
     TAGKEYS(XK_1, 0) TAGKEYS(XK_2, 1) TAGKEYS(XK_3, 2) TAGKEYS(XK_4, 3)
         TAGKEYS(XK_5, 4) TAGKEYS(XK_6, 5) TAGKEYS(XK_7, 6) TAGKEYS(XK_8, 7)
-    /* TAGKEYS(			XK_7,		6) */
-    /* TAGKEYS(			XK_8,		7) */
-    /* TAGKEYS(			XK_9,		8) */
-    {MODKEY, XK_0, view, {.ui = ~0}},
+            TAGKEYS(XK_7, 6) TAGKEYS(XK_8, 7)
+                TAGKEYS(XK_9, 8){MODKEY, XK_0, view, {.ui = ~0}},
     {MODKEY | ShiftMask, XK_0, tag, {.ui = ~0}},
     {MODKEY, XK_minus, spawn,
      SHCMD("wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-; kill -44 $(pidof "

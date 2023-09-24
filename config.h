@@ -59,17 +59,12 @@ static const char dmenufont[] = "monospace:size=10";
 
 static const char *colors[][3] = {
     /*                     fg     bg     border   */
-    [SchemeNorm] = {white, black, gray2},
-    [SchemeSel] = {gray4, blue, blue},
-    [SchemeTitle] = {white, black, black},
-    [SchemeTag] = {white, black, black},
-    [SchemeTag1] = {blue, black, black},
-    [SchemeTag2] = {red, black, black},
-    [SchemeTag3] = {orange, black, black},
-    [SchemeTag4] = {green, black, black},
-    [SchemeTag5] = {purple, black, black},
-    [SchemeTag6] = {yellow, black, black},
-    [SchemeLayout] = {blue, gray3, black},
+    [SchemeNorm] = {text, base, overlay},   [SchemeSel] = {subtle, rose, rose},
+    [SchemeTitle] = {text, base, base},     [SchemeTag] = {text, base, base},
+    [SchemeTag1] = {rose, base, base},      [SchemeTag2] = {love, base, base},
+    [SchemeTag3] = {gold, base, base},      [SchemeTag4] = {pine, base, base},
+    [SchemeTag5] = {foam, base, base},      [SchemeTag6] = {iris, base, base},
+    [SchemeLayout] = {rose, overlay, base},
 };
 
 typedef struct {
@@ -197,11 +192,11 @@ static const Layout layouts[] = {
 static const char *termcmd[] = {TERMINAL, NULL};
 
 /* OBSOLETE???? */
-static char dmenumon[2] =
-    "0"; /* component of dmenucmd, manipulated in spawn() */
+static char dmenumon[2] = "0";
+/* component of dmenucmd, manipulated in spawn() */
 static const char *dmenucmd[] = {"dmenu_run", "-m",  dmenumon, "-fn", dmenufont,
-                                 "-nb",       black, "-nf",    gray3, "-sb",
-                                 blue,        "-sf", gray4,    NULL};
+                                 "-nb",       base,  "-nf",    muted, "-sb",
+                                 foam,        "-sf", subtle,   NULL};
 
 #include <X11/XF86keysym.h>
 

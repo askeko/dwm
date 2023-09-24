@@ -11,4 +11,3 @@ static const char yellow[]      = "#f9e2af";
 static const char pink[]        = "#f5c2e7";
 static const char teal[]        = "#94e2d5";
 static const char lavender[]    = "#b4befe";
-static const char col_borderbar[]  = "#11111b"; // inner border

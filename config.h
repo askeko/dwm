@@ -67,6 +67,7 @@ typedef struct {
   const void *cmd;
 } Sp;
 
+// TODO: needs fixing! See https://github.com/wez/wezterm/discussions/2311 ... use initial_cols, initial_rows?
 const char *spcmd1[] = { TERMINAL, "--name", "spterm", "-o", "remember_window_size=no", "-o",
                         "initial_window_width=500", "-o", "initial_window_height=200", NULL };
 const char *spcmd2[] = { TERMINAL, "--name", "spcalc", "-o", "font_size=16", "-o", "remember_window_size=no",
@@ -99,13 +100,13 @@ static const Rule rules[] = {
      * WM_NAME(STRING) = title
      */
     /* class,       instance,   title,          tags mask,  isfloating, isterminal, noswallow,  monitor */
-    { "Gimp",       NULL,       NULL,           0,          1,          0,          0,          -1},
-    { "Firefox",    NULL,       NULL,           1 << 8,     0,          0,          -1,         -1},
-    { "kitty",      NULL,       NULL,           0,          0,          1,          0,          -1},
-    { "Onboard",    NULL,       NULL,           0,          1,          0,          0,          -1},
-    { NULL,         NULL,       "Event Tester", 0,          0,          0,          1,          -1}, // xev
-    { NULL,         "spterm",   NULL,           SPTAG(0),   1,          1,          0,          -1},
-    { NULL,         "spcalc",   NULL,           SPTAG(1),   1,          1,          0,          -1},
+    { "Gimp",       NULL,       NULL,           0,          1,          0,          0,          -1 },
+    { "Firefox",    NULL,       NULL,           1 << 8,     0,          0,          -1,         -1 },
+    { "kitty",      NULL,       NULL,           0,          0,          1,          0,          -1 },
+    { "Onboard",    NULL,       NULL,           0,          1,          0,          0,          -1 },
+    { NULL,         NULL,       "Event Tester", 0,          0,          0,          1,          -1 }, // xev
+    { NULL,         "spterm",   NULL,           SPTAG(0),   1,          1,          0,          -1 },
+    { NULL,         "spcalc",   NULL,           SPTAG(1),   1,          1,          0,          -1 },
 };
 
 /* LAYOUTS */
@@ -118,22 +119,22 @@ static const int lockfullscreen = 1;    /* 1 will force focus on the fullscreen 
 #include "vanitygaps.c"
 
 static const Layout layouts[] = {
-    /* symbol   arrange     function */
-    { "[]=",     tile },                    /* first entry is default */
-    { "TTT",     bstack },                  /* Master on top, slaves on bottom */
+    /* symbol       arrange                         function */
+    { "[]=",        tile },                         /* first entry is default */
+    { "TTT",        bstack },                       /* Master on top, slaves on bottom */
 
-    { "[@]",     spiral },                  /* Fibonacci spiral */
+    { "[@]",        spiral },                       /* Fibonacci spiral */
 
-    { "HHH",     grid },                    /* A grid of equal sizes */
+    { "HHH",        grid },                         /* A grid of equal sizes */
 
-    { "[D]",     deck },                    /* Master on left, slaves in monocle-like mode on right */
-    { "[M]",     monocle },                 /* All windows on top of eachother */
+    { "[D]",        deck },                         /* Master on left, slaves in monocle-like mode on right */
+    { "[M]",        monocle },                      /* All windows on top of eachother */
 
-    { "|M|",     centeredmaster },          /* Master in midle, slaves on sides */
-    { ">M>",     centeredfloatingmaster },  /* Same but master floats */
+    { "|M|",        centeredmaster },               /* Master in midle, slaves on sides */
+    { ">M>",        centeredfloatingmaster },       /* Same but master floats */
 
-    { "><>",     NULL },                    /* no layout function means floating behavior */
-    { NULL,      NULL },
+    { "><>",        NULL },                         /* no layout function means floating behavior */
+    { NULL,         NULL },
 };
 
 /* key definitions */
@@ -159,6 +160,7 @@ static const char *termcmd[] = {TERMINAL, NULL};
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
 static const char *dmenucmd[] = { "dmenu_run", "-m",  dmenumon, "-fn", dmenufont, "-nb", bg, "-nf", gray3, "-sb", blue, "-sf", gray4, NULL };
 
+/* KEYBINDS */
 #include <X11/XF86keysym.h>
 
 static Key keys[] = {
@@ -178,120 +180,115 @@ static Key keys[] = {
     TAGKEYS(XK_9, 8)
 
     /* modifier                         key                         function            argument */
-    /* { MODKEY, XK_Escape, , }, */
-    /* { MODKEY|ShiftMask, XK_Escape, spawn, SHCMD("") }, */
-    { MODKEY,                           XK_onehalf,                 tabmode,            {-1} },
-    /* { MODKEY|ShiftMask, XK_onehalf, spawn, SHCMD("") } */
+
+    /* { MODKEY,                           XK_Escape,                  ,                   }, */
+    /* { MODKEY | ShiftMask,               XK_Escape,                  ,                   }, */
+    { MODKEY,                           XK_bar,                     tabmode,            {-1} },
+    /* { MODKEY | ShiftMask,               XK_bar,                     ,                   }, */
+
+    /* 1 - 9 is bound above as tag keys */
 
     { MODKEY,                           XK_0,                       view,               {.ui = ~0} },
     { MODKEY | ShiftMask,               XK_0,                       tag,                {.ui = ~0} },
-    { MODKEY,                           XK_minus,                   spawn,              SHCMD("wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-; kill -44 $(pidof dwmblocks)") },
-    { MODKEY | ShiftMask,               XK_minus,                   spawn,              SHCMD("wpctl set-volume @DEFAULT_AUDIO_SINK@ 15%-; kill -44 $(pidof dwmblocks)") },
     { MODKEY,                           XK_plus,                    spawn,              SHCMD("wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+; kill -44 $(pidof dwmblocks)") },
     { MODKEY | ShiftMask,               XK_plus,                    spawn,              SHCMD("wpctl set-volume @DEFAULT_AUDIO_SINK@ 15%+; kill -44 $(pidof dwmblocks)") },
-    /* { MODKEY, XK_dead_acute, spawn, SHCMD(""), */
-    /* { MODKEY|ShiftMask, XK_dead_acute, spawn, SHCMD(""), */
-    /* { MODKEY, XK_BackSpace, spawn, SHCMD("") }, */
-    /* { MODKEY|ShiftMask, XK_BackSpace, spawn, SHCMD("") }, */
+    /* { MODKEY,                           XK_backslash,               ,                   }, */
+    /* { MODKEY | ShiftMask,               XK_backslash,               ,                   }, */
+
     { MODKEY,                           XK_Tab,                     view,               {0} },
-    /* { MODKEY|ShiftMask, XK_Tab, spawn, SHCMD("") }, */
-    { MODKEY,                           XK_q,                       killclient,         {0} },
-    { MODKEY | ShiftMask,               XK_q,                       spawn,              SHCMD("pwrmenu") },
-    { MODKEY,                           XK_w,                       spawn,              SHCMD("$BROWSER") },
-    /* { MODKEY|ShiftMask, XK_w, spawn, SHCMD(TERMINAL " -e sudo nmtui") }, */
-    /* { MODKEY, XK_e, spawn, SHCMD(TERMINAL " -e neomutt ; pkill -RTMIN+12 dwmblocks; rmdir ~/.abook") }, */
-    /* { MODKEY|ShiftMask, XK_e, spawn, SHCMD(TERMINAL " -e abook -C ~/.config/abook/abookrc --datafile ~/.config/abook/addressbook") }, */
-    { MODKEY,                           XK_r,                       spawn,              SHCMD(TERMINAL " -e lfub") },
-    { MODKEY | ShiftMask,               XK_r,                       spawn,              SHCMD(TERMINAL " -e htop") },
-    { MODKEY,                           XK_t,                       setlayout,          {.v = &layouts[0]} },             /* tile */
-    { MODKEY | ShiftMask,               XK_t,                       setlayout,          {.v = &layouts[1]} }, /* bstack */
-    { MODKEY,                           XK_y,                       setlayout,          {.v = &layouts[2]} },             /* spiral */
-    { MODKEY | ShiftMask,               XK_y,                       setlayout,          {.v = &layouts[3]} }, /* grid */
-    { MODKEY,                           XK_u,                       setlayout,          {.v = &layouts[4]} },             /* deck */
-    { MODKEY | ShiftMask,               XK_u,                       setlayout,          {.v = &layouts[5]} }, /* monocle */
-    { MODKEY,                           XK_i,                       setlayout,          {.v = &layouts[6]} }, /* centeredmaster */
-    { MODKEY | ShiftMask,               XK_i,                       setlayout,          {.v = &layouts[7]} }, /* centeredfloatingmaster */
-    { MODKEY,                           XK_o,                       incnmaster,         {.i = +1} },
-    { MODKEY | ShiftMask,               XK_o,                       incnmaster,         {.i = -1} },
-    { MODKEY,                           XK_p,                       spawn,              SHCMD("mpc toggle") },
-    { MODKEY | ShiftMask,               XK_p,                       spawn,              SHCMD("mpc pause ; pauseallmpv") },
-    { MODKEY,                           XK_ae,                      spawn,              SHCMD("mpc seek -10") },
-    { MODKEY | ShiftMask,               XK_ae,                      spawn,              SHCMD("mpc seek -60") },
-    { MODKEY,                           XK_oslash,                  spawn,              SHCMD("mpc seek +10") },
-    { MODKEY | ShiftMask,               XK_oslash,                  spawn,              SHCMD("mpc seek +60") },
+    /* { MODKEY | ShiftMask,               XK_Tab,                     ,                   }, */
     { MODKEY,                           XK_aring,                   spawn,              SHCMD("scr_def") },
     { MODKEY | ShiftMask,               XK_aring,                   spawn,              SHCMD("scr_home") },
-    /* { MODKEY, XK_dead_diaresis, spawn, SHCMD("") }, */
-    /* { MODKEY,ShiftMask, XK_dead_diaresis, spawn, SHCMD("") }, */
-    { MODKEY,                           XK_a,                       togglegaps,         {0} },
-    { MODKEY | ShiftMask,               XK_a,                       defaultgaps,        {0} },
-    { MODKEY,                           XK_s,                       togglesticky,       {0} },
-    { MODKEY | ShiftMask,               XK_s,                       togglesmartgaps,    {0} },
-    { MODKEY,                           XK_d,                       spawn,              SHCMD("rofi -show drun") },
-    /* { MODKEY|ShiftMask, XK_d, spawn, SHCMD("") }, */
-    { MODKEY,                           XK_f,                       togglefullscr,      {0} },
-    /* { MODKEY|ShiftMask, XK_f, setlayout, {.v = &layouts[8]} }, */
-    { MODKEY,                           XK_g,                       spawn,              SHCMD("maimp") },
-    /* { MODKEY|ShiftMask, XK_g, shifttag, { .i = 1 } }, */
-    { MODKEY,                           XK_h,                       focusmon,           {.i = -1} },
-    { MODKEY | ShiftMask,               XK_h,                       tagmon,             {.i = -1} },
-    /* J and K are automatically bound above in STACKEYS */
-    { MODKEY | ControlMask | ShiftMask, XK_v,                       spawn,              SHCMD("setxkbmap -model pc105 -layout dk -variant dvorak -option caps:escape") },
-    { MODKEY | ControlMask | ShiftMask, XK_d,                       spawn,              SHCMD("setxkbmap -model pc105 -layout dk -option caps:escape") },
-    { MODKEY,                           XK_l,                       focusmon,           {.i = +1} },
-    { MODKEY | ShiftMask,               XK_l,                       tagmon,             {.i = +1} },
-    { MODKEY,                           XK_apostrophe,              togglescratch,      {.ui = 0} },
-    { MODKEY | ShiftMask,               XK_apostrophe,              togglescratch,      {.ui = 1} },
-    { MODKEY,                           XK_Return,                  spawn,              {.v = termcmd} },
-    /* { MODKEY|ShiftMask, XK_Return, spawn, SHCMD("") }, */
-    /* { MODKEY, XK_less, spawn, SHCMD("") }, */
-    /* { MODKEY|ShiftMask, XK_less, spawn, SHCMD("") }, */
-    { MODKEY,                           XK_z,                       incrgaps,           {.i = +5} },
-    /* { MODKEY|ShiftMask, XK_z, spawn, SHCMD("") }, */
-    { MODKEY,                           XK_x,                       incrgaps,           {.i = -5} },
-    /* { MODKEY|ShiftMask, XK_x, spawn, SHCMD("") }, */
-    /* { MODKEY, XK_c, spawn, SHCMD("") }, */
-    /* { MODKEY|ShiftMask, XK_c, spawn, SHCMD("") }, */
-    /* V is automatically bound above in STACKKEYS */
-    { MODKEY,                           XK_b,                       togglebar,          {0} },
-    /* { MODKEY|ShiftMask, XK_b, spawn, SHCMD("") }, */
-    /* { MODKEY, XK_n, spawn, SHCMD(TERMINAL " -e nvim -c VimwikiIndex") }, */
-    { MODKEY | ShiftMask,               XK_n,                       spawn,              SHCMD(TERMINAL " -e newsboat") },
-    /*{ MODKEY, XK_m, spawn, SHCMD(TERMINAL " -e ncmpcpp") }, */
-    { MODKEY | ShiftMask,               XK_m,                       spawn,              SHCMD("wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle; kill -44 $(pidof " "dwmblocks)") },
     { MODKEY,                           XK_comma,                   spawn,              SHCMD("mpc prev") },
     { MODKEY | ShiftMask,               XK_comma,                   spawn,              SHCMD("mpc seek 0%") },
     { MODKEY,                           XK_period,                  spawn,              SHCMD("mpc next") },
     { MODKEY | ShiftMask,               XK_period,                  spawn,              SHCMD("mpc repeat") },
+    { MODKEY,                           XK_p,                       spawn,              SHCMD("mpc toggle") },
+    { MODKEY | ShiftMask,               XK_p,                       spawn,              SHCMD("mpc pause ; pauseallmpv") },
+    { MODKEY,                           XK_y,                       setlayout,          {.v = &layouts[2]} }, /* spiral */
+    { MODKEY | ShiftMask,               XK_y,                       setlayout,          {.v = &layouts[3]} }, /* grid */
+    { MODKEY,                           XK_f,                       togglefullscr,      {0} },
+    /* { MODKEY | ShiftMask,               XK_f,                       ,                   }, */
+    { MODKEY,                           XK_g,                       spawn,              SHCMD("maimp") },
+    /* { MODKEY | ShiftMask,               XK_g,                       ,                   }, */
+    /* { MODKEY,                           XK_c,                       ,                   }, */
+    /* { MODKEY | ShiftMask,               XK_c,                       ,                   }, */
+    { MODKEY,                           XK_r,                       spawn,              SHCMD(TERMINAL " -e lfub") },
+    { MODKEY | ShiftMask,               XK_r,                       spawn,              SHCMD(TERMINAL " -e htop") },
+    { MODKEY,                           XK_l,                       focusmon,           {.i = +1} },
+    { MODKEY | ShiftMask,               XK_l,                       tagmon,             {.i = +1} },
+    { MODKEY,                           XK_apostrophe,              togglescratch,      {.ui = 0} },
+    { MODKEY | ShiftMask,               XK_apostrophe,              togglescratch,      {.ui = 1} },
+    /* { MODKEY,                           XK_asciitilde,              ,                   }, */
+    /* { MODKEY | ShiftMask,               XK_asciitilde,              ,                   }, */
 
-    /* { MODKEY, XK_F1, spawn, SHCMD("groff -mom /usr/local/share/dwm/larbs.mom -Tpdf | zathura -") }, */
-    /* { MODKEY, XK_F2, spawn, SHCMD("tutorialvids") }, */
-    /* { MODKEY, XK_F3, spawn, SHCMD("displayselect") }, */
-    /* { MODKEY, XK_F4, spawn, SHCMD(TERMINAL " -e pulsemixer; kill -44 $(pidof dwmblocks)") }, */
-    /* { MODKEY, XK_F5, xrdb, {.v = NULL } }, */
-    /* { MODKEY, XK_F6, spawn, SHCMD("torwrap") }, */
-    /* { MODKEY, XK_F7, spawn, SHCMD("td-toggle") }, */
-    /* { MODKEY, XK_F8, spawn, SHCMD("mw -Y") }, */
-    /* { MODKEY, XK_F9, spawn, SHCMD("dmenumount") }, */
-    /* { MODKEY, XK_F10, spawn, SHCMD("dmenuumount") }, */
-    /* { MODKEY, XK_F11, spawn, SHCMD("mpv --no-cache --no-osc --no-input-default-bindings --profile=low-latency --input-conf=/dev/null --title=webcam $(ls /dev/video[0,2,4,6,8] | tail -n 1)") }, */
-    /* { MODKEY, XK_F12, spawn, SHCMD("remaps & notify-send \\\"⌨️ Keyboard remapping...\\\" \\\"Re-running keyboard defaults for any newly plugged-in keyboards.\\\"") }, */
+    { MODKEY,                           XK_a,                       togglegaps,         {0} },
+    { MODKEY | ShiftMask,               XK_a,                       defaultgaps,        {0} },
+    { MODKEY,                           XK_o,                       incnmaster,         {.i = +1} },
+    { MODKEY | ShiftMask,               XK_o,                       incnmaster,         {.i = -1} },
+    /* { MODKEY,                           XK_e,                       ,                   }, */
+    /* { MODKEY | ShiftMask,               XK_e,                       ,                   }, */
+    { MODKEY,                           XK_u,                       setlayout,          {.v = &layouts[4]} }, /* deck */
+    { MODKEY | ShiftMask,               XK_u,                       setlayout,          {.v = &layouts[5]} }, /* monocle */
+    { MODKEY,                           XK_i,                       setlayout,          {.v = &layouts[6]} }, /* centeredmaster */
+    { MODKEY | ShiftMask,               XK_i,                       setlayout,          {.v = &layouts[7]} }, /* centeredfloatingmaster */
+    { MODKEY,                           XK_d,                       spawn,              SHCMD("rofi -show drun") },
+    /* { MODKEY | ShiftMask,               XK_d,                       ,                   }, */
+    { MODKEY,                           XK_h,                       focusmon,           {.i = -1} },
+    { MODKEY | ShiftMask,               XK_h,                       tagmon,             {.i = -1} },
+    { MODKEY,                           XK_t,                       setlayout,          {.v = &layouts[0]} }, /* tile */
+    { MODKEY | ShiftMask,               XK_t,                       setlayout,          {.v = &layouts[1]} }, /* bstack */
+    /* { MODKEY,                           XK_n,                       ,                   }, */
+    // TODO: Doesn't work
+    { MODKEY | ShiftMask,               XK_n,                       spawn,              SHCMD(TERMINAL " -e newsboat") },
+    { MODKEY,                           XK_s,                       togglesticky,       {0} },
+    { MODKEY | ShiftMask,               XK_s,                       togglesmartgaps,    {0} },
+    { MODKEY,                           XK_minus,                   spawn,              SHCMD("wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-; kill -44 $(pidof dwmblocks)") },
+    { MODKEY | ShiftMask,               XK_minus,                   spawn,              SHCMD("wpctl set-volume @DEFAULT_AUDIO_SINK@ 15%-; kill -44 $(pidof dwmblocks)") },
+    { MODKEY,                           XK_less,                    spawn,              SHCMD("setxkbmap -model pc105 -layout dk -option caps:escape")},
+    { MODKEY | ShiftMask,               XK_less,                    spawn,              SHCMD("setxkbmap -model pc105 -layout dk -variant dvorak -option caps:escape")},
+
+    { MODKEY,                           XK_oslash,                  spawn,              SHCMD("mpc seek +10") },
+    { MODKEY | ShiftMask,               XK_oslash,                  spawn,              SHCMD("mpc seek +60") },
+    { MODKEY,                           XK_ae,                      spawn,              SHCMD("mpc seek -10") },
+    { MODKEY | ShiftMask,               XK_ae,                      spawn,              SHCMD("mpc seek -60") },
+    { MODKEY,                           XK_q,                       killclient,         {0} },
+    { MODKEY | ShiftMask,               XK_q,                       spawn,              SHCMD("pwrmenu") },
+
+    /* j and k is bound above as stack keys */
+
+    { MODKEY,                           XK_x,                       incrgaps,           {.i = -5} },
+    /* { MODKEY | ShiftMask,               XK_x,                       ,                   }, */
+    { MODKEY,                           XK_b,                       togglebar,          {0} },
+    /* { MODKEY | ShiftMask,               XK_b,                       ,                   }, */
+    /* { MODKEY,                           XK_m,                       ,                   }, */
+    { MODKEY | ShiftMask,               XK_m,                       spawn,              SHCMD("wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle; kill -44 $(pidof " "dwmblocks)") },
+    { MODKEY,                           XK_w,                       spawn,              SHCMD("$BROWSER") },
+    { MODKEY | ShiftMask,               XK_w,                       spawn,              SHCMD(TERMINAL " -e sudo nmtui") },
+
+    /* v is bound above as stack key */
+
+    { MODKEY,                           XK_z,                       incrgaps,           {.i = +5} },
+    /* { MODKEY | ShiftMask,               XK_z,                       ,                   }, */
+    { MODKEY,                           XK_Return,                  spawn,              {.v = termcmd} },
+    /* { MODKEY | ShiftMask,               XK_Return,                  ,                   }, */
+    /* { MODKEY,                           XK_BackSpace,               ,                   }, */
+    /* { MODKEY | ShiftMask,               XK_BackSpace,               ,                   }, */
+
     { MODKEY,                           XK_space,                   zoom,               {0} },
     { MODKEY | ShiftMask,               XK_space,                   togglefloating,     {0} },
     { MODKEY,                           XK_Left,                    setmfact,           {.f = -0.05}, },
-    /* { MODKEY|ShiftMask, XK_Left, , }, */
+    /* { MODKEY | ShiftMask,               XK_Left,                    ,                   }, */
     { MODKEY,                           XK_Right,                   setmfact,           {.f = +0.05}, },
-    /* { MODKEY|ShiftMask, XK_Right, , , }, */
+    /* { MODKEY | ShiftMask,               XK_Right,                   ,                   }, */
     { MODKEY,                           XK_Up,                      setcfact,           {.f = +0.25}, },
-    /* { MODKEY|ShiftMask, XK_Up, , , }, */
+    /* { MODKEY | ShiftMask,               XK_Up,                      ,                   }, */
     { MODKEY,                           XK_Down,                    setcfact,           {.f = -0.25}, },
-    /* { MODKEY|ShiftMask, XK_Down, , , }, */
+    /* { MODKEY | ShiftMask,               XK_Down,                    ,                   }, */
+
     { ShiftMask,                        XK_Print,                   spawn,              SHCMD("maim pic-full-$(date '+%y%m%d-%H%M-%S').png") },
     { 0,                                XK_Print,                   spawn,              SHCMD("maimp") },
-    /* { MODKEY, XK_Print, spawn, SHCMD("dmenurecord") }, */
-    /* { MODKEY|ShiftMask, XK_Print, spawn, SHCMD("dmenurecord kill") }, */
-    /* { MODKEY, XK_Delete, spawn, SHCMD("dmenurecord kill") }, */
-    /* { MODKEY, XK_Scroll_Lock, spawn, SHCMD("killall screenkey || screenkey &") }, */
+
     { 0,                                XF86XK_AudioMute,           spawn,              SHCMD("wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle; kill -44 $(pidof " "dwmblocks)") },
     { 0,                                XF86XK_AudioRaiseVolume,    spawn,              SHCMD("wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+; kill -44 $(pidof " "dwmblocks)") },
     { 0,                                XF86XK_AudioLowerVolume,    spawn,              SHCMD("wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-; kill -44 $(pidof " "dwmblocks)") },
@@ -301,11 +298,11 @@ static Key keys[] = {
     { 0,                                XF86XK_MonBrightnessDown,   spawn,              SHCMD("sudo xbacklight -dec 10") },
 };
 
-/* button definitions */
+/* BUTTON DEFINITIONS */
 /* click can be ClkTagBar, ClkLtSymbol, ClkStatusText, ClkWinTitle,
  * ClkClientWin, or ClkRootWin */
 static Button buttons[] = {
-    /* click        event mask  button      function        argument */
+    /* click         event mask  button      function        argument */
     { ClkLtSymbol,   0,          Button1,    setlayout,      {0} },
     { ClkLtSymbol,   0,          Button3,    setlayout,      {.v = &layouts[2]} },
     { ClkWinTitle,   0,          Button2,    zoom,           {0} },

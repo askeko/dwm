@@ -34,8 +34,7 @@ static const int horizpadbar            = 5;            /* horizontal padding fo
 static const int vertpadbar             = 12;           /* vertical padding for statusbar */
 
 static const char *fonts[] = {
-    "FiraCode Nerd Font Mono:style:medium:size=11",
-    "Material Design Icons-Regular:size=12",
+    "FiraCode Nerd Font Mono:style:medium:size=12",
 };
 
 static const char dmenufont[] = "monospace:size=10";
@@ -79,7 +78,7 @@ static Sp scratchpads[] = {
 };
 
 /* TAGGING */
-static const char *tags[] = { "󰆍", "󰨞", "󱗖", "󰊯", "󰙯", "󰣇", "󰣇", "󰣇", "󰣇" };
+static const char *tags[] = { "󰣇", "󰣇", "󰣇", "󰣇", "󰣇", "󰣇", "󰣇", "󰣇", "󰣇" };
 
 /* default layout per tags                                                      */
 /* The first element is for all-tag view, following i-th element corresponds to */

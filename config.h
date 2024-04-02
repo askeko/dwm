@@ -236,8 +236,8 @@ static Key keys[] = {
 
     {MODKEY, XK_Tab, view, {0}},
     /* { MODKEY | ShiftMask,               XK_Tab,                     , }, */
-    {MODKEY, XK_aring, spawn, SHCMD("scr_def")},
-    {MODKEY | ShiftMask, XK_aring, spawn, SHCMD("scr_home")},
+    /* {MODKEY, XK_aring, spawn, SHCMD("scr_def")}, */
+    /* {MODKEY | ShiftMask, XK_aring, spawn, SHCMD("scr_home")}, */
     {MODKEY, XK_comma, spawn, SHCMD("mpc prev")},
     {MODKEY | ShiftMask, XK_comma, spawn, SHCMD("mpc seek 0%")},
     {MODKEY, XK_period, spawn, SHCMD("mpc next")},

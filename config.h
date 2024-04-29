@@ -54,17 +54,17 @@ static const char *fonts[] = {
 static const char dmenufont[] = "monospace:size=10";
 
 /* THEME */
-#include "themes/tokyo_night.h"
+#include "themes/rose_pine.h"
 
 static const char *colors[][3] = {
     /*                 fg       bg      border */
-    [SchemeNorm] = {fg, bg, gray2},   [SchemeSel] = {gray4, blue, blue},
-    [SchemeTitle] = {fg, bg, bg},     [SchemeTag] = {fg, bg, bg},
-    [SchemeTag1] = {blue, bg, bg},    [SchemeTag2] = {red, bg, bg},
-    [SchemeTag3] = {green, bg, bg},   [SchemeTag4] = {yellow, bg, bg},
-    [SchemeTag5] = {purple, bg, bg},  [SchemeTag6] = {teal, bg, bg},
-    [SchemeTag7] = {orange, bg, bg},  [SchemeTag8] = {cyan, bg, bg},
-    [SchemeTag9] = {magenta, bg, bg}, [SchemeLayout] = {blue, gray2, bg},
+    [SchemeNorm] = {text, base, muted},   [SchemeSel] = {overlay, foam, foam},
+    [SchemeTitle] = {text, base, base},     [SchemeTag] = {text, base, base},
+    [SchemeTag1] = {foam, base, base},    [SchemeTag2] = {iris, base, base},
+    [SchemeTag3] = {pine, base, base},   [SchemeTag4] = {love, base, base},
+    [SchemeTag5] = {rose, base, base},  [SchemeTag6] = {gold, base, base},
+    [SchemeTag7] = {foam, base, base},  [SchemeTag8] = {iris, base, base},
+    [SchemeTag9] = {pine, base, base}, [SchemeLayout] = {foam, overlay, base},
 };
 
 /* SCRATCHPADS */
@@ -200,8 +200,8 @@ static const char *termcmd[] = {TERMINAL, NULL};
 static char dmenumon[2] =
     "0"; /* component of dmenucmd, manipulated in spawn() */
 static const char *dmenucmd[] = {"dmenu_run", "-m",  dmenumon, "-fn", dmenufont,
-                                 "-nb",       bg,    "-nf",    gray3, "-sb",
-                                 blue,        "-sf", gray4,    NULL};
+                                 "-nb",       base,    "-nf",    subtle, "-sb",
+                                 foam,        "-sf", muted,    NULL};
 
 /* KEYBINDS */
 #include <X11/XF86keysym.h>

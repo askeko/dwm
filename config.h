@@ -58,13 +58,13 @@ static const char dmenufont[] = "monospace:size=10";
 
 static const char *colors[][3] = {
     /*                 fg       bg      border */
-    [SchemeNorm] = {text, base, muted},   [SchemeSel] = {overlay, foam, foam},
-    [SchemeTitle] = {text, base, base},     [SchemeTag] = {text, base, base},
-    [SchemeTag1] = {foam, base, base},    [SchemeTag2] = {iris, base, base},
-    [SchemeTag3] = {pine, base, base},   [SchemeTag4] = {love, base, base},
+    [SchemeNorm] = {text, base, muted}, [SchemeSel] = {overlay, foam, foam},
+    [SchemeTitle] = {text, base, base}, [SchemeTag] = {text, base, base},
+    [SchemeTag1] = {foam, base, base},  [SchemeTag2] = {iris, base, base},
+    [SchemeTag3] = {pine, base, base},  [SchemeTag4] = {love, base, base},
     [SchemeTag5] = {rose, base, base},  [SchemeTag6] = {gold, base, base},
     [SchemeTag7] = {foam, base, base},  [SchemeTag8] = {iris, base, base},
-    [SchemeTag9] = {pine, base, base}, [SchemeLayout] = {foam, overlay, base},
+    [SchemeTag9] = {pine, base, base},  [SchemeLayout] = {foam, overlay, base},
 };
 
 /* SCRATCHPADS */
@@ -106,8 +106,8 @@ static Sp scratchpads[] = {
 };
 
 /* TAGGING */
-static const char *tags[] = {"󰣇", "󰣇", "󰣇", "󰣇", "󰣇",
-                             "󰣇", "󰣇", "󰣇", "󰣇"};
+static const char *tags[] = {"󰣇", "",  "",  "󰈹", "",
+                             "󰓇", "󰣇", "󰣇", "󰣇"};
 
 /* default layout per tags */
 /* The first element is for all-tag view, following i-th element corresponds to
@@ -199,9 +199,9 @@ static const char *termcmd[] = {TERMINAL, NULL};
 
 static char dmenumon[2] =
     "0"; /* component of dmenucmd, manipulated in spawn() */
-static const char *dmenucmd[] = {"dmenu_run", "-m",  dmenumon, "-fn", dmenufont,
-                                 "-nb",       base,    "-nf",    subtle, "-sb",
-                                 foam,        "-sf", muted,    NULL};
+static const char *dmenucmd[] = {
+    "dmenu_run", "-m",   dmenumon, "-fn", dmenufont, "-nb", base,
+    "-nf",       subtle, "-sb",    foam,  "-sf",     muted, NULL};
 
 /* KEYBINDS */
 #include <X11/XF86keysym.h>

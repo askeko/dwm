@@ -2,7 +2,7 @@
 
 /* CONSTANTS */
 #include <X11/X.h>
-#define TERMINAL "wezterm"
+#define TERMINAL "kitty"
 
 /* APPEARANCE */
 static const unsigned int borderpx = 3; /* border pixel of windows */

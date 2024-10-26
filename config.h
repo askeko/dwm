@@ -181,78 +181,78 @@ static Key keys[] = {
     TAGKEYS(XK_8, 7)
     TAGKEYS(XK_9, 8)
 
-    /* modifier, key, function, argument */
+/*   modifier,              key,            function,           argument */
 
-    {MODKEY, XK_bar, tabmode, {-1}},
+    {MODKEY,                XK_bar,         tabmode,            {-1}},
 
     /* 1 - 9 is bound above as tag keys */
 
-    {MODKEY,                XK_0,           view, {.ui = ~0}},
-    {MODKEY | ShiftMask,    XK_0,           tag, {.ui = ~0}},
-    {MODKEY,                XK_plus,        spawn, SHCMD("wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+; kill -44 $(pidof dwmblocks)")},
-    {MODKEY | ShiftMask,    XK_plus,        spawn, SHCMD("wpctl set-volume @DEFAULT_AUDIO_SINK@ 15%+; kill -44 $(pidof dwmblocks)")},
-    {MODKEY,                XK_Tab,         view, {0}},
-    {MODKEY,                XK_p,           spawn, SHCMD("maimp")},
-    {MODKEY | ShiftMask,    XK_p,           spawn, SHCMD("maim -u -s | ${xclip_cmd}")},
-    {MODKEY,                XK_y,           setlayout, {.v = &layouts[2]}},             /* spiral */
-    {MODKEY | ShiftMask,    XK_y,           setlayout, {.v = &layouts[3]}}, /* grid */
-    {MODKEY,                XK_f,           togglefullscr, {0}},
-    {MODKEY,                XK_r,           spawn, SHCMD(TERMINAL " -e lfub")},
-    {MODKEY | ShiftMask,    XK_r,           spawn, SHCMD(TERMINAL " -e btop")},
-    {MODKEY,                XK_l,           focusmon, {.i = +1}},
-    {MODKEY | ShiftMask,    XK_l,           tagmon, {.i = +1}},
-    {MODKEY,                XK_apostrophe,  togglescratch, {.ui = 0}},
-    {MODKEY | ShiftMask,    XK_apostrophe,  togglescratch, {.ui = 1}},
-    {MODKEY,                XK_a,           togglegaps, {0}},
-    {MODKEY | ShiftMask,    XK_a,           defaultgaps, {0}},
-    {MODKEY,                XK_o,           incnmaster, {.i = +1}},
-    {MODKEY | ShiftMask,    XK_o,           incnmaster, {.i = -1}},
-    {MODKEY,                XK_u,           setlayout, {.v = &layouts[4]}},             /* deck */
-    {MODKEY | ShiftMask,    XK_u,           setlayout, {.v = &layouts[5]}}, /* monocle */
-    {MODKEY,                XK_i,           setlayout, {.v = &layouts[6]}}, /* centeredmaster */
-    {MODKEY | ShiftMask,    XK_i,           setlayout, {.v = &layouts[7]}}, /* FcenteredM */
-    {MODKEY,                XK_d,           spawn, SHCMD("rofi -show drun")},
-    {MODKEY,                XK_h,           focusmon, {.i = -1}},
-    {MODKEY | ShiftMask,    XK_h,           tagmon, {.i = -1}},
-    {MODKEY,                XK_t,           setlayout, {.v = &layouts[0]}},             /* tile */
-    {MODKEY | ShiftMask,    XK_t,           setlayout, {.v = &layouts[1]}}, /* bstack */
-    {MODKEY | ShiftMask,    XK_n,           spawn, SHCMD(TERMINAL " -e newsboat")},
-    {MODKEY,                XK_s,           togglesticky, {0}},
-    {MODKEY | ShiftMask,    XK_s,           togglesmartgaps, {0}},
-    {MODKEY,                XK_minus,       spawn, SHCMD("wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-; kill -44 $(pidof dwmblocks)")},
-    {MODKEY | ShiftMask,    XK_minus,       spawn, SHCMD("wpctl set-volume @DEFAULT_AUDIO_SINK@ 15%-; kill -44 $(pidof dwmblocks)")},
-    {MODKEY,                XK_q,           killclient, {0}},
-    {MODKEY | ShiftMask,    XK_q,           spawn, SHCMD("pwrmenu")},
+    {MODKEY,                XK_0,           view,               {.ui = ~0}},
+    {MODKEY | ShiftMask,    XK_0,           tag,                {.ui = ~0}},
+    {MODKEY,                XK_plus,        spawn,              SHCMD("wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+; kill -44 $(pidof dwmblocks)")},
+    {MODKEY | ShiftMask,    XK_plus,        spawn,              SHCMD("wpctl set-volume @DEFAULT_AUDIO_SINK@ 15%+; kill -44 $(pidof dwmblocks)")},
+    {MODKEY,                XK_Tab,         view,               {0}},
+    {MODKEY,                XK_p,           spawn,              SHCMD("maimp")},
+    {MODKEY | ShiftMask,    XK_p,           spawn,              SHCMD("maim -u -s | ${xclip_cmd}")},
+    {MODKEY,                XK_y,           setlayout,          {.v = &layouts[2]}},             /* spiral */
+    {MODKEY | ShiftMask,    XK_y,           setlayout,          {.v = &layouts[3]}}, /* grid */
+    {MODKEY,                XK_f,           togglefullscr,      {0}},
+    {MODKEY,                XK_r,           spawn,              SHCMD(TERMINAL " -e lfub")},
+    {MODKEY | ShiftMask,    XK_r,           spawn,              SHCMD(TERMINAL " -e btop")},
+    {MODKEY,                XK_l,           focusmon,           {.i = +1}},
+    {MODKEY | ShiftMask,    XK_l,           tagmon,             {.i = +1}},
+    {MODKEY,                XK_apostrophe,  togglescratch,      {.ui = 0}},
+    {MODKEY | ShiftMask,    XK_apostrophe,  togglescratch,      {.ui = 1}},
+    {MODKEY,                XK_a,           togglegaps,         {0}},
+    {MODKEY | ShiftMask,    XK_a,           defaultgaps,        {0}},
+    {MODKEY,                XK_o,           incnmaster,         {.i = +1}},
+    {MODKEY | ShiftMask,    XK_o,           incnmaster,         {.i = -1}},
+    {MODKEY,                XK_u,           setlayout,          {.v = &layouts[4]}},             /* deck */
+    {MODKEY | ShiftMask,    XK_u,           setlayout,          {.v = &layouts[5]}}, /* monocle */
+    {MODKEY,                XK_i,           setlayout,          {.v = &layouts[6]}}, /* centeredmaster */
+    {MODKEY | ShiftMask,    XK_i,           setlayout,          {.v = &layouts[7]}}, /* FcenteredM */
+    {MODKEY,                XK_d,           spawn,              SHCMD("rofi -show drun")},
+    {MODKEY,                XK_h,           focusmon,           {.i = -1}},
+    {MODKEY | ShiftMask,    XK_h,           tagmon,             {.i = -1}},
+    {MODKEY,                XK_t,           setlayout,          {.v = &layouts[0]}},             /* tile */
+    {MODKEY | ShiftMask,    XK_t,           setlayout,          {.v = &layouts[1]}}, /* bstack */
+    {MODKEY | ShiftMask,    XK_n,           spawn,              SHCMD(TERMINAL " -e newsboat")},
+    {MODKEY,                XK_s,           togglesticky,       {0}},
+    {MODKEY | ShiftMask,    XK_s,           togglesmartgaps,    {0}},
+    {MODKEY,                XK_minus,       spawn,              SHCMD("wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-; kill -44 $(pidof dwmblocks)")},
+    {MODKEY | ShiftMask,    XK_minus,       spawn,              SHCMD("wpctl set-volume @DEFAULT_AUDIO_SINK@ 15%-; kill -44 $(pidof dwmblocks)")},
+    {MODKEY,                XK_q,           killclient,         {0}},
+    {MODKEY | ShiftMask,    XK_q,           spawn,              SHCMD("pwrmenu")},
 
     /* j and k is bound above as stack keys */
 
-    {MODKEY,                XK_x,           incrgaps, {.i = -5}},
-    {MODKEY,                XK_b,           togglebar, {0}},
-    {MODKEY | ShiftMask,    XK_m,           spawn, SHCMD("wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle; kill -44 $(pidof dwmblocks)")},
-    {MODKEY,                XK_w,           spawn, SHCMD("$BROWSER")},
-    {MODKEY | ShiftMask,    XK_w,           spawn, SHCMD(TERMINAL " -e nmtui")},
+    {MODKEY,                XK_x,           incrgaps,           {.i = -5}},
+    {MODKEY,                XK_b,           togglebar,          {0}},
+    {MODKEY | ShiftMask,    XK_m,           spawn,              SHCMD("wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle; kill -44 $(pidof dwmblocks)")},
+    {MODKEY,                XK_w,           spawn,              SHCMD("$BROWSER")},
+    {MODKEY | ShiftMask,    XK_w,           spawn,              SHCMD(TERMINAL " -e nmtui")},
 
     /* v is bound above as stack key */
 
-    {MODKEY,                XK_z,           incrgaps, {.i = +5}},
-    {MODKEY,                XK_Return,      spawn, {.v = termcmd}},
-    {MODKEY,                XK_space,       zoom, {0}},
-    {MODKEY | ShiftMask,    XK_space,       togglefloating, {0}},
-    {MODKEY,                XK_Left,        setmfact, {.f = -0.05}},
-    {MODKEY,                XK_Right,       setmfact, {.f = +0.05}},
-    {MODKEY,                XK_Up,          setcfact, {.f = +0.25}},
-    {MODKEY,                XK_Down,        setcfact, {.f = -0.25}},
+    {MODKEY,                XK_z,           incrgaps,           {.i = +5}},
+    {MODKEY,                XK_Return,      spawn,              {.v = termcmd}},
+    {MODKEY,                XK_space,       zoom,               {0}},
+    {MODKEY | ShiftMask,    XK_space,       togglefloating,     {0}},
+    {MODKEY,                XK_Left,        setmfact,           {.f = -0.05}},
+    {MODKEY,                XK_Right,       setmfact,           {.f = +0.05}},
+    {MODKEY,                XK_Up,          setcfact,           {.f = +0.25}},
+    {MODKEY,                XK_Down,        setcfact,           {.f = -0.25}},
 
-    {0,                     XK_Print,       spawn, SHCMD("maimp")},
-    {ShiftMask,             XK_Print,       spawn, SHCMD("maim -u -s | ${xclip_cmd}")},
+    {0,                     XK_Print,       spawn,              SHCMD("maimp")},
+    {ShiftMask,             XK_Print,       spawn,              SHCMD("maim -u -s | ${xclip_cmd}")},
 
-    {0, XF86XK_AudioMute,                   spawn, SHCMD("wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle; kill -44 $(pidof dwmblocks)")},
-    {0, XF86XK_AudioRaiseVolume,            spawn, SHCMD("wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+; kill -44 $(pidof dwmblocks)")},
-    {0, XF86XK_AudioLowerVolume,            spawn, SHCMD("wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-; kill -44 $(pidof dwmblocks)")},
-    {0, XF86XK_AudioMicMute,                spawn, SHCMD("wpctl set-source-mute @DEFAULT_SOURCE@ toggle")},
-    {0, XF86XK_Calculator,                  spawn, SHCMD(TERMINAL " e bc -l")},
-    {0, XF86XK_MonBrightnessUp,             spawn, SHCMD("brightnessctl set +10%")},
-    {0, XF86XK_MonBrightnessDown,           spawn, SHCMD("brightnessctl set 10%-")},
+    {0, XF86XK_AudioMute,                   spawn,              SHCMD("wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle; kill -44 $(pidof dwmblocks)")},
+    {0, XF86XK_AudioRaiseVolume,            spawn,              SHCMD("wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+; kill -44 $(pidof dwmblocks)")},
+    {0, XF86XK_AudioLowerVolume,            spawn,              SHCMD("wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-; kill -44 $(pidof dwmblocks)")},
+    {0, XF86XK_AudioMicMute,                spawn,              SHCMD("wpctl set-source-mute @DEFAULT_SOURCE@ toggle")},
+    {0, XF86XK_Calculator,                  togglescratch,      {.ui = 1}},
+    {0, XF86XK_MonBrightnessUp,             spawn,              SHCMD("brightnessctl set +10%")},
+    {0, XF86XK_MonBrightnessDown,           spawn,              SHCMD("brightnessctl set 10%-")},
 };
 
 /* BUTTON DEFINITIONS */

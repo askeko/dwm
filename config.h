@@ -238,22 +238,22 @@ static Key keys[] = {
     /* { MODKEY | ShiftMask,               XK_Tab,                     , }, */
     /* {MODKEY, XK_aring, spawn, SHCMD("scr_def")}, */
     /* {MODKEY | ShiftMask, XK_aring, spawn, SHCMD("scr_home")}, */
-    {MODKEY, XK_comma, spawn, SHCMD("mpc prev")},
-    {MODKEY | ShiftMask, XK_comma, spawn, SHCMD("mpc seek 0%")},
-    {MODKEY, XK_period, spawn, SHCMD("mpc next")},
-    {MODKEY | ShiftMask, XK_period, spawn, SHCMD("mpc repeat")},
-    {MODKEY, XK_p, spawn, SHCMD("mpc toggle")},
-    {MODKEY | ShiftMask, XK_p, spawn, SHCMD("mpc pause ; pauseallmpv")},
+    /*{MODKEY, XK_comma, spawn, SHCMD("mpc prev")},*/
+    /*{MODKEY | ShiftMask, XK_comma, spawn, SHCMD("mpc seek 0%")},*/
+    /*{MODKEY, XK_period, spawn, SHCMD("mpc next")},*/
+    /*{MODKEY | ShiftMask, XK_period, spawn, SHCMD("mpc repeat")},*/
+    {MODKEY, XK_p, spawn, SHCMD("maimp")},
+    {MODKEY | ShiftMask, XK_p, spawn, SHCMD("maim -u -s | ${xclip_cmd}")},
     {MODKEY, XK_y, setlayout, {.v = &layouts[2]}},             /* spiral */
     {MODKEY | ShiftMask, XK_y, setlayout, {.v = &layouts[3]}}, /* grid */
     {MODKEY, XK_f, togglefullscr, {0}},
     /* { MODKEY | ShiftMask,               XK_f,                       , }, */
-    {MODKEY, XK_g, spawn, SHCMD("maimp")},
+    /*{MODKEY, XK_g, spawn, SHCMD("maimp")},*/
     /* { MODKEY | ShiftMask,               XK_g,                       , }, */
     /* { MODKEY,                           XK_c,                       , }, */
     /* { MODKEY | ShiftMask,               XK_c,                       , }, */
     {MODKEY, XK_r, spawn, SHCMD(TERMINAL " -e lfub")},
-    {MODKEY | ShiftMask, XK_r, spawn, SHCMD(TERMINAL " -e htop")},
+    {MODKEY | ShiftMask, XK_r, spawn, SHCMD(TERMINAL " -e btop")},
     {MODKEY, XK_l, focusmon, {.i = +1}},
     {MODKEY | ShiftMask, XK_l, tagmon, {.i = +1}},
     {MODKEY, XK_apostrophe, togglescratch, {.ui = 0}},
@@ -358,7 +358,7 @@ static Key keys[] = {
     /* { MODKEY | ShiftMask,               XK_Down,                    , }, */
 
     {ShiftMask, XK_Print, spawn,
-     SHCMD("maim pic-full-$(date '+%y%m%d-%H%M-%S').png")},
+     SHCMD("maim -u -s | ${xclip_cmd}")},
     {0, XK_Print, spawn, SHCMD("maimp")},
 
     {0, XF86XK_AudioMute, spawn,
@@ -384,7 +384,6 @@ static Button buttons[] = {
     /* click         event mask  button      function        argument */
     {ClkLtSymbol, 0, Button1, setlayout, {0}},
     {ClkLtSymbol, 0, Button3, setlayout, {.v = &layouts[2]}},
-    {ClkWinTitle, 0, Button2, zoom, {0}},
     {ClkStatusText, 0, Button1, sigstatusbar, {.i = 1}},
     {ClkStatusText, 0, Button2, sigstatusbar, {.i = 2}},
     {ClkStatusText, 0, Button3, sigstatusbar, {.i = 3}},

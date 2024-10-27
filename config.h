@@ -5,7 +5,7 @@
 #define TERMINAL "kitty"
 
 /* APPEARANCE */
-static const unsigned int borderpx          = 3;    /* border pixel of windows */
+static const unsigned int borderpx          = 2;    /* border pixel of windows */
 static const unsigned int snap              = 32;   /* Snap pixel */
 
 static const unsigned int systraypinning    = 0;    /* 0: sloppy systray follows selected monitor, >0: pin systray to monitorX */
@@ -40,10 +40,13 @@ enum showtab_modes {
 static const int showtab                    = showtab_auto; /* Default tab bar show mode */
 static const Bool toptab                    = False;        /* False means bottom tab bar */
 static const unsigned int colorfultag       = 1;            /* 0 means use SchemeSel for selected tag */
-static const int horizpadbar                = 5;            /* horizontal padding for statusbar */
-static const int vertpadbar                 = 12;           /* vertical padding for statusbar */
+static const int horizpadbar                = 8;            /* horizontal padding for statusbar */
+static const int vertpadbar                 = 10;           /* vertical padding for statusbar */
 
-static const char *fonts[]                  = {"FiraCode Nerd Font Mono:style:medium:size=12"};
+static const char *fonts[]                  = {
+    "FiraSans-Regular:11",
+    "FiraCodeNerdFontMono:style:medium:size=16",
+};
 static const char dmenufont[]               = "monospace:size=10";
 
 /* THEME */
@@ -83,7 +86,7 @@ static Sp scratchpads[] = {
 };
 
 /* TAGGING */
-static const char *tags[] = {"󰣇", "", "", "󰈹", "", "󰓇", "󰣇", "󰣇", "󰣇"};
+static const char *tags[] = {"", "", "", "", "", "", "", "", ""};
 
 /* default layout per tags */
 /* The first element is for all-tag view, following i-th element corresponds to */

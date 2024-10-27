@@ -44,7 +44,7 @@ static const int horizpadbar                = 8;            /* horizontal paddin
 static const int vertpadbar                 = 10;           /* vertical padding for statusbar */
 
 static const char *fonts[]                  = {
-    "FiraSans-Regular:11",
+    "FiraSans-Regular:style:medium:size=11",
     "FiraCodeNerdFontMono:style:medium:size=16",
 };
 static const char dmenufont[]               = "monospace:size=10";

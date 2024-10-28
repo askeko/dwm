@@ -232,7 +232,7 @@ static Key keys[] = {
 
     /* Programs */
     {MODKEY,                XK_p,           spawn,              SHCMD("maimp")},
-    {MODKEY | ShiftMask,    XK_p,           spawn,              SHCMD("maim -u -s | ${xclip_cmd}")},
+    {MODKEY | ShiftMask,    XK_p,           spawn,              SHCMD("maim -u -s | xclip -sel clip -t image/png")},
     {MODKEY,                XK_r,           spawn,              SHCMD(TERMINAL " -e lfub")},
     {MODKEY | ShiftMask,    XK_r,           spawn,              SHCMD(TERMINAL " -e btop")},
     {MODKEY,                XK_apostrophe,  togglescratch,      {.ui = 0}},
@@ -245,7 +245,7 @@ static Key keys[] = {
     {MODKEY | ShiftMask,    XK_w,           spawn,              SHCMD(TERMINAL " -e nmtui")},
     {MODKEY,                XK_Return,      spawn,              {.v = termcmd}},
     {0,                     XK_Print,       spawn,              SHCMD("maimp")},
-    {ShiftMask,             XK_Print,       spawn,              SHCMD("maim -u -s | ${xclip_cmd}")},
+    {ShiftMask,             XK_Print,       spawn,              SHCMD("maim -u -s | xclip -sel clip -t image/png")},
 
     /* FN keys */
     {0, XF86XK_AudioMute,                   spawn,              SHCMD("wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle; kill -44 $(pidof dwmblocks)")},

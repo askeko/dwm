@@ -233,7 +233,7 @@ static Key keys[] = {
     /* Programs */
     {MODKEY,                XK_p,           spawn,              SHCMD("maimp")},
     {MODKEY | ShiftMask,    XK_p,           spawn,              SHCMD("maim -u -s | xclip -sel clip -t image/png")},
-    {MODKEY,                XK_r,           spawn,              SHCMD(TERMINAL " -e lfub")},
+    {MODKEY,                XK_r,           spawn,              SHCMD(TERMINAL " -e yazi")},
     {MODKEY | ShiftMask,    XK_r,           spawn,              SHCMD(TERMINAL " -e btop")},
     {MODKEY,                XK_apostrophe,  togglescratch,      {.ui = 0}},
     {MODKEY | ShiftMask,    XK_apostrophe,  togglescratch,      {.ui = 1}},
